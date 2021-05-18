@@ -1,15 +1,15 @@
 ---
 title: Adding labels to issues
-intro: You can use {% data variables.product.prodname_actions %} to automatically label issues.
+intro: 'You can use {% data variables.product.prodname_actions %} to automatically label issues.'
 product: '{% data reusables.gated-features.actions %}'
 versions:
   free-pro-team: '*'
   enterprise-server: '>=2.22'
   github-ae: '*'
-type: 'tutorial'
+type: tutorial
 topics:
-  - 'Workflows'
-  - 'Project management'
+  - Workflows
+  - Project management
 ---
 
 {% data reusables.actions.enterprise-beta %}
@@ -46,6 +46,7 @@ In the tutorial, you will first make a workflow file that uses the [`andymckay/l
             uses: andymckay/labeler@1.0.2
             with:
               add-labels: "triage"
+              repo-token: {% raw %}${{ secrets.GITHUB_TOKEN }}{% endraw %}
     ```
 
 4. Customize the parameters in your workflow file:
