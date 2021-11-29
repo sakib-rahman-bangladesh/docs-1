@@ -8,12 +8,13 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
+  ghec: '*'
 topics:
   - API
 shortTitle: Traverse with pagination
 ---
 
-The {% data variables.product.product_name %} API provides a vast wealth of information for developers to consume.
+The {% ifversion fpt or ghec %}{% data variables.product.prodname_dotcom %}{% else %}{% data variables.product.product_name %}{% endif %} API provides a vast wealth of information for developers to consume.
 Most of the time, you might even find that you're asking for _too much_ information,
 and in order to keep our servers happy, the API will automatically [paginate the requested items][pagination].
 
@@ -36,7 +37,7 @@ provides items in sets of 100
 [events](/rest/reference/activity#events) won't let you set a maximum for items to receive.
 Be sure to read the documentation on how to handle paginated results for specific endpoints.
 
-Information about pagination is provided in [the Link header](http://tools.ietf.org/html/rfc5988)
+Information about pagination is provided in [the Link header](https://datatracker.ietf.org/doc/html/rfc5988)
 of an API call. For example, let's make a curl request to the search API, to find
 out how many times Mozilla projects use the phrase `addClass`:
 

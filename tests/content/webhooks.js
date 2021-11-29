@@ -1,23 +1,24 @@
 import { difference } from 'lodash-es'
 import { getJSON } from '../helpers/supertest.js'
 import { latest } from '../../lib/enterprise-server-releases.js'
-import xAllVersions from '../../lib/all-versions.js'
+import { allVersions } from '../../lib/all-versions.js'
 import webhookPayloads from '../../lib/webhooks'
 import { jest } from '@jest/globals'
 
-const allVersions = Object.values(xAllVersions)
-const payloadVersions = allVersions.map((v) => v.miscVersionName)
+const allVersionValues = Object.values(allVersions)
+
+const payloadVersions = allVersionValues.map((v) => v.miscVersionName)
 
 // grab some values for testing
-const nonEnterpriseDefaultPayloadVersion = allVersions.find(
+const nonEnterpriseDefaultPayloadVersion = allVersionValues.find(
   (version) => version.nonEnterpriseDefault
 ).miscVersionName
 
-const latestGhesPayloadVersion = allVersions.find(
+const latestGhesPayloadVersion = allVersionValues.find(
   (version) => version.currentRelease === latest
 ).miscVersionName
 
-const ghaePayloadVersion = allVersions.find(
+const ghaePayloadVersion = allVersionValues.find(
   (version) => version.plan === 'github-ae'
 ).miscVersionName
 
@@ -26,14 +27,21 @@ describe('webhook payloads', () => {
 
   test('have expected top-level keys', () => {
     payloadVersions.forEach((version) => {
-      expect(version in webhookPayloads).toBe(true)
+      // todo: remove if check once we have API/webhook versions for ghec
+      // Docs Engineering issue: 979
+      if (version !== 'ghec') {
+        expect(version in webhookPayloads).toBe(true)
+      }
     })
   })
 
   test('have a reasonable number of payloads per version', () => {
     payloadVersions.forEach((version) => {
-      const payloadsPerVersion = Object.keys(webhookPayloads[version])
-      expect(payloadsPerVersion.length).toBeGreaterThan(20)
+      // todo: remove if check once we have API/webhook versions for ghec
+      if (version !== 'ghec') {
+        const payloadsPerVersion = Object.keys(webhookPayloads[version])
+        expect(payloadsPerVersion.length).toBeGreaterThan(20)
+      }
     })
   })
 

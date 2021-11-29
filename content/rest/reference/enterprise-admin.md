@@ -1,5 +1,6 @@
 ---
 title: GitHub Enterprise administration
+intro: You can use these endpoints to administer your enterprise. Among the tasks you can perform with this API are many relating to GitHub Actions.
 allowTitleToDifferFromFilename: true
 redirect_from:
   - /v3/enterprise-admin
@@ -8,15 +9,14 @@ versions:
   fpt: '*'
   ghes: '*'
   ghae: '*'
+  ghec: '*'
 topics:
   - API
 miniTocMaxHeadingLevel: 3
 shortTitle: Enterprise administration
 ---
 
-You can use these endpoints to administer your enterprise.
-
-{% ifversion fpt %}
+{% ifversion fpt or ghec %}
 
 {% note %}
 
@@ -64,7 +64,7 @@ You can also read the current version by calling the [meta endpoint](/rest/refer
 
 {% endif %}
 
-{% ifversion fpt %}
+{% ifversion fpt or ghec or ghes > 3.2 %}
 
 ## Audit log
 
@@ -74,7 +74,7 @@ You can also read the current version by calling the [meta endpoint](/rest/refer
 
 {% endif %}
 
-{% ifversion fpt %}
+{% ifversion fpt or ghec %}
 ## Billing
 
 {% for operation in currentRestOperations %}
@@ -83,7 +83,6 @@ You can also read the current version by calling the [meta endpoint](/rest/refer
 
 {% endif %}
 
-{% ifversion fpt or ghes > 2.21 or ghae %}
 ## GitHub Actions
 
 {% data reusables.actions.ae-beta %}
@@ -92,7 +91,6 @@ You can also read the current version by calling the [meta endpoint](/rest/refer
   {% if operation.subcategory == 'actions' %}{% include rest_operation %}{% endif %}
 {% endfor %}
 
-{% endif %}
 
 {% ifversion ghae or ghes %}
 ## Admin stats
@@ -144,7 +142,6 @@ With the LDAP mapping endpoints, you're able to update the Distinguished Name (D
 {% endfor %}
 
 {% endif %}
-
 
 {% ifversion ghae or ghes %}
 ## License
@@ -205,7 +202,6 @@ The Organization Administration API allows you to create organizations on your e
 {% endfor %}
 
 {% endif %}
-
 
 {% ifversion ghes %}
 ## Organization pre-receive hooks

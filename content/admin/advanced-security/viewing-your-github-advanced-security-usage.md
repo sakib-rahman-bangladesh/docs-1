@@ -5,12 +5,17 @@ permissions: 'Enterprise owners can view usage for {% data variables.product.pro
 product: '{% data reusables.gated-features.ghas %}'
 versions:
   ghes: '>=3.1'
+type: how_to
 topics:
+  - Advanced Security
   - Enterprise
+  - Licensing
 shortTitle: View Advanced Security usage
 ---
 
-{% data reusables.advanced-security.about-ghas-license-seats %} For more information, see "[About licensing for {% data variables.product.prodname_GH_advanced_security %}](/admin/advanced-security/about-licensing-for-github-advanced-security)."
+## About licenses for {% data variables.product.prodname_GH_advanced_security %}
+
+{% data reusables.advanced-security.about-ghas-license-seats %} For more information, see "[About billing for {% data variables.product.prodname_GH_advanced_security %}](/billing/managing-billing-for-github-advanced-security/about-billing-for-github-advanced-security)."
 
 ## Viewing license usage for {% data variables.product.prodname_GH_advanced_security %}
 

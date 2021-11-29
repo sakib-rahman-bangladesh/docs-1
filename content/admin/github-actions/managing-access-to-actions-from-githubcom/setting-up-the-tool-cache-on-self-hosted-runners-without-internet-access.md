@@ -5,10 +5,14 @@ redirect_from:
   - /enterprise/admin/github-actions/setting-up-the-tool-cache-on-self-hosted-runners-without-internet-access
   - /admin/github-actions/setting-up-the-tool-cache-on-self-hosted-runners-without-internet-access
 versions:
-  ghes: '>=2.22'
+  ghes: '*'
   ghae: next
+type: tutorial
 topics:
+  - Actions
   - Enterprise
+  - Networking
+  - Storage
 shortTitle: Tool cache for offline runners
 ---
 {% data reusables.actions.enterprise-beta %}

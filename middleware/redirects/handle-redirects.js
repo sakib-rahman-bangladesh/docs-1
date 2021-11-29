@@ -1,23 +1,39 @@
 import patterns from '../../lib/patterns.js'
 import { URL } from 'url'
+import languages from '../../lib/languages.js'
 
 export default function handleRedirects(req, res, next) {
   // never redirect assets
   if (patterns.assetPaths.test(req.path)) return next()
 
-  // blanket redirects for languageless homepage to English homepage
+  // blanket redirects for languageless homepage
   if (req.path === '/') {
-    return res.redirect(301, '/en')
+    let language = 'en'
+
+    // if set, redirect to user's preferred language translation or else English
+    if (
+      req.context.userLanguage &&
+      languages[req.context.userLanguage] &&
+      !languages[req.context.userLanguage].wip
+    ) {
+      language = req.context.userLanguage
+    }
+
+    res.set('cache-control', 'private, no-store')
+    return res.redirect(302, `/${language}`)
   }
 
   // begin redirect handling
   let redirect = req.path
   let queryParams = req._parsedUrl.query
 
-  // update old-style query params (#9467)
   // have to do this now because searchPath replacement changes the path as well as the query params
   if (queryParams) {
-    queryParams = '?' + queryParams.replace('q=', 'query=')
+    // update old-style query params (#9467)
+    if ('q' in req.query) {
+      queryParams = queryParams.replace('q=', 'query=')
+    }
+    queryParams = '?' + queryParams
     redirect = (redirect + queryParams).replace(patterns.searchPath, '$1')
   }
 

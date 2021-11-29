@@ -6,11 +6,13 @@ redirect_from:
   - /actions/automating-your-workflow-with-github-actions/hosting-your-own-runners
 versions:
   fpt: '*'
-  ghes: '>=2.22'
+  ghes: '*'
   ghae: '*'
+  ghec: '*'
 children:
   - /about-self-hosted-runners
   - /adding-self-hosted-runners
+  - /autoscaling-with-self-hosted-runners
   - /configuring-the-self-hosted-runner-application-as-a-service
   - /using-a-proxy-server-with-self-hosted-runners
   - /using-labels-with-self-hosted-runners
